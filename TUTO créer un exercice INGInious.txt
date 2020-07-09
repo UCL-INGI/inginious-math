@@ -1,0 +1,71 @@
+
+        ### Créer un exercice INGInious
+
+1. Pour écrire des formules mathématiques en latex dans les énoncés des questions, utiliser les balises
+
+    a. inline, exemple: :math:`\frac{1}{4}`
+
+    b. block, exemple:
+
+.. math::
+
+    e^x = 3 \sin(x) + 2
+
+
+2. Les énoncés des questions sont écrits en reStructuredText
+
+    a. Ecrire des titres et sous-titres
+
+=====
+Titre
+=====
+----------
+Sous-titre
+----------
+
+    b. Faire des bullets listes, exemple:
+
+- pomme
+- banane
+- ananas
+- ...
+
+    c. Faire des tableaux, exemple:
+
++------------+------------+-----------+
+| Header 1   | Header 2   | Header 3  |
++============+============+===========+
+| body row 1 | column 2   | column 3  |
++------------+------------+-----------+
+| body row 2 | Cells may span columns.|
++------------+------------+-----------+
+| body row 3 | Cells may  | - Cells   |
++------------+ span rows. | - contain |
+| body row 4 |            | - blocks. |
++------------+------------+-----------+
+
+    d. Faire des notes de bas de page, exemple:
+
+Numérotation automatique, première note [#]_, deuxième note [#]_.
+
+.. [#] première note.
+.. [#] deuxième note.
+
+    e. Faire des hyperliens, exemple:
+
+Un hyperlien vers Inginious_.
+
+.. _Inginious: https://inginious.info.ucl.ac.be
+
+    f. etc,.. plus d'info sur le site refercence: https://docutils.sourceforge.io/docs/user/rst/quickref.html
+
+
+3. Faire des graphes avec JSXGraph: voir tuto sur JSXGraph
+
+
+4. Ajouter des tags: il est possible de créer des tags sur Inginious dans l'onglet tags dans
+   l'administration du cours. On peut par exemple associer à chaque exercice un tag de difficultée
+   et un tag de catégorie d'exercice.
+
+
+Document à compléter!
