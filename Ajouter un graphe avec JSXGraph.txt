@@ -23,3 +23,7 @@
 	d. possibilitée de créer des points, des cercles, des droites, etc, se référer à la doc et aux exemple -> https://jsxgraph.org/wiki/index.php/Documentation
 		Exemple: b.create('point', [X, Y], {strokeColor:'#00ff00'})
 	e. Attention: si plusieurs graphes sur une même question il faut changer le nom de l'id de la div et le premier argument de la fonction initBoard()
+
+
+Ajouter un point vide: b.create('circle', [[X,Y], 0.03], {strokeWidth:1});
+Ajouter un point plein: b.create('circle', [[0,2], 0.02], {strokeWidth:3});
