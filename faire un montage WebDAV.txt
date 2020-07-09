@@ -1,0 +1,24 @@
+
+        ### Comment faire un montage WebDAV sur Ubuntu
+
+Ce genre de montage sert à avoir accès aux fichiers task.yaml de chaque exercice et course.yaml d'un
+cours inginious dans son explorateur de fichiers sur sa machine. Cela peut-être utile pour executer
+des scripts pour modifier automatiquement tout les exercices rapidement.
+
+Procédure:
+
+1. Ouvrire un Terminal
+2. Créer un répertoire InginiousCourse/
+
+    sudo mkdir InginiousCourse
+
+3. Utiliser la commande davfs2 pour créer le montage en remplaçant l'URL par celle donnée dans l'onglet
+   Tasks dans l'administration de votre cours Inginious.
+
+    sudo mount.davfs https://inginious-dav.info.ucl.ac.be/Course
+
+4. Entrer votre nom d'utilisateur donnée sur ce même onglet.
+5. Entrer votre mot de passe aussi donnée au même endroit.
+
+
+reference: https://doc.ubuntu-fr.org/davfs2
