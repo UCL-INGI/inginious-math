@@ -12,11 +12,11 @@
 
 .. raw:: html
 
-  	<div id='jxgbox1' class='jxgbox mb-3' style='width:300px; height:150px;'></div>
-  		<script type='text/javascript'>
-    	var b = JXG.JSXGraph.initBoard('jxgbox1', {boundingbox: [-3, 3, 3, -2], axis: true});
-    	b.create('functiongraph', [function(x){return Math.cos(x);},-2,2]);
-  	</script>
+	<div id='jxgbox1' class='jxgbox mb-3' style='width:300px; height:150px;'></div>
+		<script type='text/javascript'>
+		var b = JXG.JSXGraph.initBoard('jxgbox1', {boundingbox: [-3, 3, 3, -2], axis: true});
+		b.create('functiongraph', [function(x){return Math.cos(x);},-2,2]);
+	</script>
 
 	a. adapter 'width' et 'height' en pixel
 	b. adapter les valeurs de boundingbox qui représente les coordonnées du coin supérieur gauche et celles du point inférieur droit
