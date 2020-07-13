@@ -1,4 +1,4 @@
-from parsingDomain import is_subset, is_integer, compareDomains
+from parsingDomain import is_interval, is_integer, compareDomains, expandSet, expandInterval, expandExclu, is_set, is_simpleInterval, is_intervalExclu
 
 def unitTest(fun, arg, expected):
     result = fun(arg)
@@ -23,7 +23,13 @@ def unitTest2(result, expected):
     else:
         print()
 
-print("Test of 'is_integer'")
+def unitTestSimple(actual, expected):
+    if actual == expected:
+        print("Test succeeded")
+    else:
+        print("Test FAILED")
+
+print("Test of 'is_integer'\n")
 
 unitTest(is_integer, "-144", True)
 unitTest(is_integer, "144", True)
@@ -33,24 +39,73 @@ unitTest(is_integer, "abc", False)
 unitTest(is_integer, "11aa", False)
 unitTest(is_integer, "aa11", False)
 unitTest(is_integer, "0", True)
+unitTest(is_integer, "a", False)
 
-print("\nTest of 'is_subset'")
+print("\nTest of 'is_interval'\n")
 
-unitTest(is_subset, "]-4;-1]U{1}U[2;4]", True)
-unitTest(is_subset, "]-4;-1]U{1}U[2,4]", False)
-unitTest(is_subset, "]-4;-1]U{1}U[2;4", False)
-unitTest(is_subset, "]-4;1;-1]U{1}U[2;4]", False)
-unitTest(is_subset, "{1}", True)
-unitTest(is_subset, "]abc;-1]U{1}U[2;4]", False)
-unitTest(is_subset, "]-4;-1]U{1}UU[2;4]", False)
-unitTest(is_subset, "", False)
-unitTest(is_subset, "12", False)
-unitTest(is_subset, "[2]", False)
-unitTest(is_subset, "[3;2]", False)
-unitTest(is_subset, "[3;3]", False)
+unitTest(is_interval, "]-4;-1]U{1}U[2;4]", True)
+unitTest(is_interval, "]-4;-1]U{1}U[2,4]", False)
+unitTest(is_interval, "]-4;-1]U{1}U[2;4", False)
+unitTest(is_interval, "]-4;1;-1]U{1}U[2;4]", False)
+unitTest(is_interval, "{1}", True)
+unitTest(is_interval, "]abc;-1]U{1}U[2;4]", False)
+unitTest(is_interval, "]-4;-1]U{1}UU[2;4]", False)
+unitTest(is_interval, "", False)
+unitTest(is_interval, "12", False)
+unitTest(is_interval, "[2]", False)
+unitTest(is_interval, "[3;2]", False)
+unitTest(is_interval, "[3;3]", False)
+unitTest(is_interval, "{0;1;2;3}", True)
+unitTest(is_interval, "{0;2;a;3}", False)
+unitTest(is_interval, "[0;2]\{1}", True)
+unitTest(is_interval, "[0;2]\{3}", False)
+unitTest(is_interval, "[0;2;3]\{1}", False)
+unitTest(is_interval, "[0;2]\{a}", False)
 
-print("\nTest of 'compareDomains'")
+print("\nTest of 'compareDomains'\n")
 
 unitTest2(compareDomains("[1;2]", "[2;3]U[1;2]"), False)
 unitTest2(compareDomains("[2;3]U[1;2]", "[1;2]"), False)
-unitTest2(compareDomains(" [ 2 ; 3 ] U [ 1 ; 2 ] ", "[1;2]U[2;3]"), True)
+unitTest2(compareDomains("[2;3]U[1;2]", "[1;2]U[2;3]"), True)
+unitTest2(compareDomains(" [ 1 ; 2 ] ", "[1;2]"), True)
+unitTest2(compareDomains("[-2;10]\{3;5;7} U [11;12[", "[11;12[ U [-2;3[U]3;5[U]5;7[U]7;10]"), True)
+unitTest2(compareDomains("[-2;10]\{3;5;10} U [11;12[", "[11;12[ U [-2;3[U]3;5[U]5;7[U]7;10]"), False)
+
+print("\nTest of 'expandSet'\n")
+
+unitTestSimple(expandSet("{0;1;2}"), "{0}U{1}U{2}")
+unitTestSimple(expandSet("{0}"), "{0}")
+
+print("\nTest of 'expandExclu'\n")
+
+unitTestSimple(expandExclu("[2;5]\{3;4}"), "[2;3[U]3;4[U]4;5]")
+
+print("\nTest of 'expandInterval'\n")
+
+unitTestSimple(expandInterval("{0;1;2}"), "{0}U{1}U{2}")
+unitTestSimple(expandInterval("[2;5]\{3;4}"), "[2;3[U]3;4[U]4;5]")
+unitTestSimple(expandInterval("[2;5]\{3;4}U{0;1;2}"), "[2;3[U]3;4[U]4;5]U{0}U{1}U{2}")
+
+print("\nTest of 'is_set'\n")
+
+unitTest(is_set, "{1;2;3", False)
+unitTest(is_set, "{1;2;3}", True)
+unitTest(is_set, "1;2;3", False)
+unitTest(is_set, "{a;2;3}", False)
+
+print("\nTest of 'is_simpleInterval'\n")
+
+unitTest(is_simpleInterval, "[2;3;4]", False)
+unitTest(is_simpleInterval, "[4;3]", False)
+unitTest(is_simpleInterval, "[3;4}", False)
+unitTest(is_simpleInterval, "[a;b]", False)
+unitTest(is_simpleInterval, "[1,2]", False)
+unitTest(is_simpleInterval, "[1;10]", True)
+
+print("\nTest of 'is_intervalExclu'\n")
+
+unitTest(is_intervalExclu, "[2;3]\{4}", False)
+unitTest(is_intervalExclu, "[2;3]\{1}", False)
+unitTest(is_intervalExclu, "[2;8]\{3}\{4}", False)
+unitTest(is_intervalExclu, "[4;2]\{3}", False)
+unitTest(is_intervalExclu, "[2;3]\{3}", False)
