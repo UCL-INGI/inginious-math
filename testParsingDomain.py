@@ -1,10 +1,18 @@
 from parsingDomain import is_interval, is_integer, compareDomains, expandSet, expandInterval, expandExclu, is_set, is_simpleInterval, is_intervalExclu
 
+succeededCount = 0
+failedCount = 0
+
 def unitTest(fun, arg, expected):
+    global failedCount
+    global succeededCount
+
     result = fun(arg)
     if result[0] == expected:
+        succeededCount += 1
         print("Test succeeded:", end="")
     else:
+        failedCount += 1
         print("Test FAILED", end="")
 
     if result[0] == False:
@@ -13,9 +21,14 @@ def unitTest(fun, arg, expected):
         print(" ( {} )".format(arg))
 
 def unitTest2(result, expected):
+    global failedCount
+    global succeededCount
+
     if result[0] == expected:
+        succeededCount += 1
         print("Test succeeded:", end="")
     else:
+        failedCount += 1
         print("Test FAILED", end="")
 
     if result[0] == False:
@@ -24,9 +37,14 @@ def unitTest2(result, expected):
         print()
 
 def unitTestSimple(actual, expected):
+    global failedCount
+    global succeededCount
+
     if actual == expected:
+        succeededCount += 1
         print("Test succeeded")
     else:
+        failedCount += 1
         print("Test FAILED")
 
 print("Test of 'is_integer'\n")
@@ -61,6 +79,8 @@ unitTest(is_interval, "[0;2]\{1}", True)
 unitTest(is_interval, "[0;2]\{3}", False)
 unitTest(is_interval, "[0;2;3]\{1}", False)
 unitTest(is_interval, "[0;2]\{a}", False)
+unitTest(is_interval, "{}", True)
+unitTest(is_interval, "{0}u{1}", True)
 
 print("\nTest of 'compareDomains'\n")
 
@@ -109,3 +129,6 @@ unitTest(is_intervalExclu, "[2;3]\{1}", False)
 unitTest(is_intervalExclu, "[2;8]\{3}\{4}", False)
 unitTest(is_intervalExclu, "[4;2]\{3}", False)
 unitTest(is_intervalExclu, "[2;3]\{3}", False)
+
+print("\n\nNumber of tests succeeded: {}/{}".format(succeededCount,succeededCount+failedCount))
+print("Number of tests failed: {}/{}".format(failedCount, failedCount+succeededCount))

@@ -1,3 +1,10 @@
+""" Vérifie que @n soit bien un nombre entier.
+
+    pre: @n, une chaine de caractères
+    post: renvoie
+      @b, un boolean, vrai si @n représente un nombre entier, faux sinon
+      @s, une chaine de caractères contenant un commentaire
+"""
 def is_integer(n):
     try:
         int(n)
@@ -5,7 +12,17 @@ def is_integer(n):
     except:
         return False, "{} n'est pas un nombre correct".format(n)
 
+""" Vérifie que @set soit bien un ensemble de nombres entiers.
+
+    pre: @set, une chaine de caractères
+    post: renvoie
+      @b, un boolean, vrai si @set représente un ensembles de nombres entiers, faux sinon
+      @s, une chaine de caractères contenant un commentaire
+"""
 def is_set(set):
+    if set == "{}":
+        return True, "Ensemble vide"
+
     if set[0] != '{' or set[-1] != '}':
         return False, "L'ensemble {} ne commence pas par '{}' ou ne finit pas par '{}'".format(set, "{", "}")
     set = set[1:-1].split(';')
@@ -14,6 +31,13 @@ def is_set(set):
             return False, "{} n'est pas un nombre correct".format(number)
     return True, "correct"
 
+""" Vérifie que @interval soit bien un intervalle.
+
+    pre: @interval, une chaine de caractères
+    post: renvoie
+      @b, un boolean, vrai si @interval représente un intervalle, faux sinon
+      @s, une chaine de caractères contenant un commentaire
+"""
 def is_simpleInterval(interval):
     if not interval[0] in '[]' or not interval[-1] in '[]':
         return False, "L'ensemble {} ne commence et ne finit pas par ] ou [".format(interval)
@@ -36,10 +60,19 @@ def is_simpleInterval(interval):
 
     return True, "correct"
 
-def is_intervalExclu(interval_):
-    interval = interval_.split('\\')
+""" Vérifie que @interval soit bien un intervalle avec une exclusion d'un ensemble de nombres entiers.
+    Vérifie aussi que les éléments exclus soient dans l'intervalle.
+
+    pre: @interval, une chaine de caractères
+    post: renvoie
+      @b, un boolean, vrai si @interval représente un intervalle, faux sinon
+      @s, une chaine de caractères contenant un commentaire
+"""
+def is_intervalExclu(interval):
+    int_cpy = interval
+    interval = interval.split('\\')
     if len(interval) != 2:
-        return False, "{} n'est pas correct, il y a trop de symbole '\\'".format(interval_)
+        return False, "{} n'est pas correct, il y a trop de symbole '\\'".format(int_cpy)
     if not is_simpleInterval(interval[0])[0]:
         return is_simpleInterval(interval[0])
     if not is_set(interval[1])[0]:
@@ -51,12 +84,19 @@ def is_intervalExclu(interval_):
     n2 = interval[1]
 
     if int(min(set, key=float)) <= int(n1):
-        return False, "Le plus petit élément de l'ensemble est plus petit ou égal à {} dans {}".format(n1, interval_)
+        return False, "Le plus petit élément de l'ensemble est plus petit ou égal à {} dans {}".format(n1, int_cpy)
     if int(max(set, key=float)) >= int(n2):
-        return False, "Le plus grand élément de l'ensemble est plus grand ou égal à {} dans {}".format(n2, interval_)
+        return False, "Le plus grand élément de l'ensemble est plus grand ou égal à {} dans {}".format(n2, int_cpy)
 
     return True, "correct"
 
+""" Vérifie que @interval soit bien une union d'intervalles et d'ensembles avec possiblement des exclusions.
+
+    pre: @interval, une chaine de caractères
+    post: renvoie
+      @b, un boolean, vrai si @interval représente une union, faux sinon
+      @s, une chaine de caractères contenant un commentaire
+"""
 def is_interval(set):
     # @set is a string containing information about the subset
     # returns True if it is a subset or False if not
@@ -65,6 +105,7 @@ def is_interval(set):
         return False, "Vous n'avez rien répondu"
 
     set = set.replace(" ", "")
+    set = set.replace("u", "U")
 
     intervals = set.split('U')
 
@@ -72,7 +113,7 @@ def is_interval(set):
         if interval == "":
             return False, "Il y a trop de symboles 'U' dans votre expression"
 
-        if len(interval) <= 2:
+        if len(interval) <= 1:
             return False, "{} n'est pas un intervalle correct".format(interval)
 
         if interval[0] == '{' and interval[-1] == '}': # si c'est un ensemble
@@ -92,6 +133,13 @@ def is_interval(set):
 
     return True, "correct"
 
+""" Transforme la chaine de caractères représentant un intervalle avec une exclusion en une chaine
+    de caractères contenant une union de plusieurs intervalles sans exclusions.
+
+    pre: @interval, une chaine de caractère valide
+    post: revoie
+      @s, une chaine de caractère contenant la transformation en unions d'intervalles sans exclusions
+"""
 def expandExclu(interval):
     interval = interval.split('\\')
     set = interval[1]
@@ -113,6 +161,13 @@ def expandExclu(interval):
 
     return s
 
+""" Transforme la chaine de caractères représentant un ensemble d'entiers en une chaine
+    de caractères contenant une union de plusieurs singletons.
+
+    pre: @set, une chaine de caractère valide
+    post: revoie
+      @s, une chaine de caractère contenant la transformation en unions de singletons
+"""
 def expandSet(set):
     set = set[1:-1].split(';')
     s = ""
@@ -121,9 +176,22 @@ def expandSet(set):
     s = s[:-1]
     return s
 
+""" Transforme la chaine de caractères représentant une union d'intervalles et d'ensembles avec
+    possiblement des exclusions en une chaine de caractères contenant uniquement des unions d'intervalles
+    et de singletons sans exclusions.
+
+    pre: @interval, une chaine de caractère valide
+    post: revoie
+      @s, une chaine de caractère contenant la transformation en unions d'intervalles et de singletons
+      sans exclusions
+"""
 def expandInterval(interval):
+
     interval = interval.replace(" ", "")
+    interval = interval.replace("u", "U")
+
     interval = interval.split("U")
+
     for i in range(len(interval)):
         if interval[i][0] == '{':
             interval[i] = expandSet(interval[i])
@@ -136,7 +204,16 @@ def expandInterval(interval):
         result = result + "{}U".format(e)
     return result[:-1]
 
+""" Vérifie que @answer soit bien une unions d'intervalles équivalent à @expected
 
+    pre:
+      @answer: une chaine de caractères
+      @expected: une chaine de caractères valide
+
+    post: renvoie
+      @b, un boolean, vrai si les deux arguments sont équivalent, faux sinon
+      @s, une chaine de caractères contenant un commentaire
+"""
 def compareDomains(answer, expected):
 
     result = is_interval(answer)
