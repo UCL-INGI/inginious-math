@@ -15,7 +15,7 @@ Procédure:
 3. Utiliser la commande davfs2 pour créer le montage en remplaçant l'URL par celle donnée dans l'onglet
    Tasks dans l'administration de votre cours Inginious.
 
-    sudo mount.davfs https://inginious-dav.info.ucl.ac.be/Course
+    sudo mount.davfs https://inginious-dav.info.ucl.ac.be/Course InginiousCourse
 
 4. Entrer votre nom d'utilisateur donnée sur ce même onglet.
 5. Entrer votre mot de passe aussi donnée au même endroit.
