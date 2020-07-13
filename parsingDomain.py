@@ -1,11 +1,14 @@
-""" Vérifie que @n soit bien un nombre entier.
+""" Vérifie que @n soit bien un nombre entier ou + ou - l'infini.
 
     pre: @n, une chaine de caractères
     post: renvoie
-      @b, un boolean, vrai si @n représente un nombre entier, faux sinon
+      @b, un boolean, vrai si @n représente un nombre entier ou +/- infini, faux sinon
       @s, une chaine de caractères contenant un commentaire
 """
 def is_integer(n):
+    if n in ["+inf", "-inf", "inf"]:
+        return True, "+ ou - infini"
+
     try:
         int(n)
         return True, "correct"
@@ -57,7 +60,19 @@ def is_simpleInterval(interval):
         return False, "{} n'est pas un nombre correct".format(numbers[0])
     if not is_integer(numbers[1])[0]:
         return False, "{} n'est pas un nombre correct".format(numbers[1])
-    if int(numbers[0]) > int(numbers[1]):
+
+    if numbers[0] in ["+inf", "inf"]:
+        return False, "l'ensemble {} n'existe pas".format(interval)
+    elif numbers[1] == "-inf":
+        return False, "l'ensemble {} n'existe pas".format(interval)
+    elif numbers[0] == "-inf":
+        if interval[0] != ']':
+            return False, "l'infini ne doit pas être compris dans l'intervalle {}".format(interval)
+    elif numbers[1] in ["+inf", "inf"]:
+        if interval[-1] != '[':
+            return False, "l'infini ne doit pas être compris dans l'intervalle {}".format(interval)
+
+    elif int(numbers[0]) > int(numbers[1]):
         return False, "{}: la première borne est plus grande que la deuxième!".format(interval)
     elif int(numbers[0]) == int(numbers[1]):
         return False, "{}: les deux bornes sont égales! Utiliser un singleton ({}) à la place peut-être".format(interval, "{}")
@@ -88,9 +103,9 @@ def is_intervalExclu(interval):
         n1 = interval[0]
         n2 = interval[1]
 
-        if int(min(set, key=float)) <= int(n1):
+        if n1 != "-inf" and int(min(set, key=float)) <= int(n1):
             return False, "Le plus petit élément de l'ensemble est plus petit ou égal à {} dans {}".format(n1, int_cpy)
-        if int(max(set, key=float)) >= int(n2):
+        if n2 != "+inf" and int(max(set, key=float)) >= int(n2):
             return False, "Le plus grand élément de l'ensemble est plus grand ou égal à {} dans {}".format(n2, int_cpy)
 
     return True, "correct"
@@ -153,11 +168,17 @@ def expandExclu(interval):
     set = set[1:-1].split(";")
     set.sort(key=float)
 
-    begin = interval[0]
-    end = interval[-1]
-    interval = interval[1:-1].split(";")
-    n1 = interval[0]
-    n2 = interval[1]
+    if interval == 'R':
+        begin = ']'
+        end = '['
+        n1 = "-inf"
+        n2 = "inf"
+    else:
+        begin = interval[0]
+        end = interval[-1]
+        interval = interval[1:-1].split(";")
+        n1 = interval[0]
+        n2 = interval[1]
 
     s = begin+n1+";" # ex: s = "]0;"
     for e in set:
@@ -194,6 +215,7 @@ def expandInterval(interval):
 
     interval = interval.replace(" ", "")
     interval = interval.replace("u", "U")
+    interval = interval.replace("+inf", "inf")
 
     interval = interval.split("U")
 
