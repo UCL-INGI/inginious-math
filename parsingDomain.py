@@ -50,3 +50,24 @@ def is_subset(set):
             return False, "{} n'est pas un intervalle correct".format(interval)
 
     return True, "correct"
+
+def compareDomains(answer, expected):
+
+    result = is_subset(answer)
+    if not result[0]:
+        return False, result[1]
+
+    answer = answer.replace(" ", "")
+    expected = expected.replace(" ", "")
+
+    answer = answer.split("U")
+    expected = expected.split("U")
+
+    for e in answer:
+        if not e in expected:
+            return False, "{} ne fait pas partie de la réponse".format(e)
+    for e in expected:
+        if not e in answer:
+            return False, "Il vous manque des intervalles dans la réponse"
+
+    return True, "correct"
