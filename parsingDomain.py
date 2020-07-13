@@ -39,6 +39,10 @@ def is_set(set):
       @s, une chaine de caractères contenant un commentaire
 """
 def is_simpleInterval(interval):
+
+    if interval in ['R', 'N', 'Z', 'Q']:
+        return True, "correct"
+
     if not interval[0] in '[]' or not interval[-1] in '[]':
         return False, "L'ensemble {} ne commence et ne finit pas par ] ou [".format(interval)
 
@@ -78,15 +82,16 @@ def is_intervalExclu(interval):
     if not is_set(interval[1])[0]:
         return is_set(interval[1])
 
-    set = interval[1][1:-1].split(";")
-    interval = interval[0][1:-1].split(";")
-    n1 = interval[0]
-    n2 = interval[1]
+    if not interval[0] in ['R', 'N', 'Z', 'Q']:
+        set = interval[1][1:-1].split(";")
+        interval = interval[0][1:-1].split(";")
+        n1 = interval[0]
+        n2 = interval[1]
 
-    if int(min(set, key=float)) <= int(n1):
-        return False, "Le plus petit élément de l'ensemble est plus petit ou égal à {} dans {}".format(n1, int_cpy)
-    if int(max(set, key=float)) >= int(n2):
-        return False, "Le plus grand élément de l'ensemble est plus grand ou égal à {} dans {}".format(n2, int_cpy)
+        if int(min(set, key=float)) <= int(n1):
+            return False, "Le plus petit élément de l'ensemble est plus petit ou égal à {} dans {}".format(n1, int_cpy)
+        if int(max(set, key=float)) >= int(n2):
+            return False, "Le plus grand élément de l'ensemble est plus grand ou égal à {} dans {}".format(n2, int_cpy)
 
     return True, "correct"
 
@@ -113,18 +118,18 @@ def is_interval(set):
         if interval == "":
             return False, "Il y a trop de symboles 'U' dans votre expression"
 
-        if len(interval) <= 1:
-            return False, "{} n'est pas un intervalle correct".format(interval)
+        elif interval in ['R', 'N', 'Z', 'Q']:              # si c'est un ensemble spécial
+            pass
 
-        if interval[0] == '{' and interval[-1] == '}': # si c'est un ensemble
+        elif interval[0] == '{' and interval[-1] == '}':    # si c'est un ensemble discret
             if is_set(interval)[0] == False:
                 return is_set(interval)
 
-        elif interval[0] in '[]' and interval[-1] in '[]': # si c'est un intervalle simple
+        elif interval[0] in '[]' and interval[-1] in '[]':  # si c'est un intervalle simple
             if is_simpleInterval(interval)[0] == False:
                 return is_simpleInterval(interval)
 
-        elif '\\' in interval: # si c'est un intervalle avec des exclusions
+        elif '\\' in interval:                              # si c'est un intervalle avec une exclusion
             if is_intervalExclu(interval)[0] == False:
                 return is_intervalExclu(interval)
 

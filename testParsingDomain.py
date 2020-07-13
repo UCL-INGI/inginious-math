@@ -81,6 +81,8 @@ unitTest(is_interval, "[0;2;3]\{1}", False)
 unitTest(is_interval, "[0;2]\{a}", False)
 unitTest(is_interval, "{}", True)
 unitTest(is_interval, "{0}u{1}", True)
+unitTest(is_interval, "R", True)
+unitTest(is_interval, "R\{0}", True)
 
 print("\nTest of 'compareDomains'\n")
 
