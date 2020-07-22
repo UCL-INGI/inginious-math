@@ -4,7 +4,7 @@
 
 Choisir le type d'environnement "Docker container" et l'environnement de correction "math"
 
-Créer un sous-problème de type "code(une seule ligne)"
+Type de sous-problème : pas d'importance mais pas mettre d' "Expected answer"
 
 1) L'énoncé de la question :
 
@@ -48,7 +48,7 @@ Exemple d'énoncé :
     de manière que le deuxième ait <b><span id="ipr2"></span></b> € de plus que le premier, 
     et le troisième <b><span id="ipr3"></span></b> € de moins que le deuxième.
 
-On pose :math:`x` la part du premier. Ecrivez l'équation du premier degré.
+On pose x la part du premier. Ecrivez l'équation du premier degré.
 
 .. raw:: html
 

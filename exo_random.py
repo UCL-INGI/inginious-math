@@ -4,6 +4,7 @@
 # Ce fichier doit être utilisé pour un exercice de type 'random'
 
 import re
+#import math                Si nécessaire
 from sympy import sympify, simplify
 from sympy.parsing.latex import parse_latex
 from inginious import input, feedback, rst
