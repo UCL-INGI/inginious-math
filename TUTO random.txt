@@ -6,6 +6,8 @@ Choisir le type d'environnement "Docker container" et l'environnement de correct
 
 Type de sous-problème : pas d'importance mais pas mettre d' "Expected answer"
 
+Si on veut que les données changent à chaque rafraichissement de la page : cocher la case "Regénérer l'entrée aléatoire" et indiquer le nombre correcte de paramètres aléatoires
+
 1) L'énoncé de la question :
 
 .. raw:: html
