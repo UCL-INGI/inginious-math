@@ -111,6 +111,7 @@ unitTest2(compareDomains("[-2;10]\{3;5;10} U [11;12[", "[11;12[ U [-2;3[U]3;5[U]
 unitTest2(compareDomains("R\{0}", "]-inf;0[U]0;+inf["), True)
 unitTest2(compareDomains("]-inf;inf[", "]-inf;+inf["), True)
 unitTest2(compareDomains("{0}u{1}", "{0}U{1}"), True)
+unitTest2(compareDomains("R", "R"), True)
 
 print("\nTest of 'expandSet'\n")
 
