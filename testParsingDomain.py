@@ -112,6 +112,7 @@ unitTest2(compareDomains("R\{0}", "]-inf;0[U]0;+inf["), True)
 unitTest2(compareDomains("]-inf;inf[", "]-inf;+inf["), True)
 unitTest2(compareDomains("{0}u{1}", "{0}U{1}"), True)
 unitTest2(compareDomains("R", "R"), True)
+unitTest2(compareDomains("R", "]-inf ; +inf["), True)
 
 print("\nTest of 'expandSet'\n")
 

@@ -216,6 +216,7 @@ def expandInterval(interval):
     interval = interval.replace(" ", "")
     interval = interval.replace("u", "U")
     interval = interval.replace("+inf", "inf")
+    interval = interval.replace("]-inf;inf[", "R")
 
     interval = interval.split("U")
 
