@@ -1,7 +1,7 @@
 #!/bin/python3
 # -*- coding: utf-8 -*-
 
-# Ce fichier doit être utilisé pour un exercice de type 'random'
+# Ce fichier doit être utilisé pour un exercice de type 'random' à un seul sous-problème
 
 import re
 #import math                Si nécessaire
@@ -14,7 +14,7 @@ from inginious import input, feedback, rst
 
 # nom_de_variable = int(input.get_input("@random")[indice]*100)
 
-# Ce qui correspond à l'exemple d'énoncé du TUTO :
+# Ce qui correspond à l'exemple d'énoncé du TUTO (à remplacer) :
 
 somme = 10000*int(input.get_input("@random")[0] * 100 + 1)
 plus2 = 1000*int(input.get_input("@random")[1] * 100 + 1)
@@ -23,14 +23,13 @@ minus3 = 1000*int(input.get_input("@random")[2] * 100 + 1)
 
 # Définir comment la réponse correcte sera vérifiée avec les différents paramètres
 
-# Ce qui correspond à l'exemple du TUTO :
+# Ce qui correspond à l'exemple du TUTO (à remplacer) :
 
 correct_equation = str(somme) + " = x + x + " + str(plus2) + " + x  + " + str(plus2)  + " - " + str(minus3)
 
-# Surement à modifier si la réponse n'est pas une équation :
+
 
 def parse_equation(latex_str):
-    # The \left and \right prefix are not supported by sympy (and useless for treatment)
     latex_str = re.sub("(\\\left|\\\\right)", "", latex_str)
     return parse_latex(latex_str)
 

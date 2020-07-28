@@ -96,4 +96,6 @@ Un hyperlien vers Inginious_.
    et un tag de catégorie d'exercice.
 
 
+5. Faire des exercices avec des entrées générées aléatoirement : voir tuto random
+
 Document à compléter!
