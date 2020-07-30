@@ -10,6 +10,76 @@
 \usepackage{subfig}
 \usepackage{hyperref}
 \usepackage{color}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+
+\definecolor{darkWhite}{rgb}{0.94,0.94,0.94}
+ 
+\lstset{
+  aboveskip=3mm,
+  belowskip=-2mm,
+  backgroundcolor=\color{darkWhite},
+  basicstyle=\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{red},
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  framexleftmargin=16pt,
+  framextopmargin=3pt,
+  framexbottommargin=6pt,
+  frame=tb,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  language=Python,
+  literate=
+  {²}{{\textsuperscript{2}}}1
+  {⁴}{{\textsuperscript{4}}}1
+  {⁶}{{\textsuperscript{6}}}1
+  {⁸}{{\textsuperscript{8}}}1
+  {€}{{\euro{}}}1
+  {é}{{\'e}}1
+  {è}{{\`{e}}}1
+  {ê}{{\^{e}}}1
+  {ë}{{\¨{e}}}1
+  {É}{{\'{E}}}1
+  {Ê}{{\^{E}}}1
+  {û}{{\^{u}}}1
+  {ù}{{\`{u}}}1
+  {â}{{\^{a}}}1
+  {à}{{\`{a}}}1
+  {á}{{\'{a}}}1
+  {ã}{{\~{a}}}1
+  {Á}{{\'{A}}}1
+  {Â}{{\^{A}}}1
+  {Ã}{{\~{A}}}1
+  {ç}{{\c{c}}}1
+  {Ç}{{\c{C}}}1
+  {õ}{{\~{o}}}1
+  {ó}{{\'{o}}}1
+  {ô}{{\^{o}}}1
+  {Õ}{{\~{O}}}1
+  {Ó}{{\'{O}}}1
+  {Ô}{{\^{O}}}1
+  {î}{{\^{i}}}1
+  {Î}{{\^{I}}}1
+  {í}{{\'{i}}}1
+  {Í}{{\~{Í}}}1,
+  morekeywords={*,...},
+  numbers=left,
+  numbersep=10pt,
+  numberstyle=\tiny\color{black},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=1,
+  stringstyle=\color{olive},
+  tabsize=4,
+  title=\lstname,
+}
 
 \begin{document}
 \input{./page_garde.tex}
@@ -21,9 +91,21 @@
 
 \section{Premier pas sur INGInious}
 
+Si vous souhaitez créer un cours, il est nécessaire de contacter l'administrateur de la plateforme. 
+
+Plus d'informations dans la documentation officielle d'INGInious : 
+\bigskip
+
+\url{https://inginious.readthedocs.io/en/latest/index.html}
+
+\bigskip
 En étant l'administrateur d'un cours sur INGInious, l'accès à de nombreuses fonctionnalités vous est permise grâce à l'onglet "Administration du cours". 
 
-Dans "Paramètres du cours" vous pourrez, notamment, ajouter des administrateurs et modifier l'accessibilité et les inscriptions des étudiants à ce cours. Dans la partie "Étiquettes", il est possible de créer des étiquettes à attacher aux exercices et qui permettront aux étudiants de filtrer la liste d'exercices en fonction de celles-ci, ce qui est très utile quand le cours possède un grand nombre d'exercices. Pour vous exercer, créez une étiquette ayant comme ID "Test" et cochez la case "visible pour l'étudiant".
+Dans "Paramètres du cours" vous pourrez, notamment, ajouter des administrateurs et modifier l'accessibilité et les inscriptions des étudiants à ce cours. Dans la partie "Étiquettes", il est possible de créer des étiquettes à attacher aux exercices et qui permettront aux étudiants de filtrer la liste d'exercices en fonction de celles-ci, ce qui est très utile quand le cours possède un grand nombre d'exercices. Elles peuvent, par exemple, servir à indiquer un chapitre de la matière ou un niveau de difficulté. Pour vous exercer, créez une étiquette ayant comme ID "Test" et cochez la case "visible pour l'étudiant". Si vous souhaitez plus d'informations concernant les étiquettes, suivez le lien ci-dessous :
+\bigskip
+
+\url{https://dial.uclouvain.be/memoire/ucl/object/thesis:14637}
+\bigskip
 
 Ce tutoriel se penchera sur l'onglet "Exercices" qui permet de créer et d'ajouter vos propres exercices au cours. Les autres parties, bien qu'intéressantes, ne seront pas développées ici, mais n'hésitez pas à aller les découvrir par vous-même. 
 
@@ -36,7 +118,7 @@ Nous allons maintenant créer un exercice basique qui pourra vous servir de base
     \includegraphics[scale=0.5]{images/Exercices.PNG}
 \end{figure}
 
-Après avoir choisis un identifiant, qui devra être différent pour chaque exercice, vous pouvez créer votre premier exercice.
+Après avoir choisi un identifiant, qui devra être différent pour chaque exercice, vous pouvez créer votre premier exercice.
 Dans les paramètres de base vous pouvez ajouter un nom à votre exercice, c'est celui que verront les étudiants, à la différence de l'identifiant, que seuls les administrateurs peuvent voir.  L'option "Catégorie" permet d'attacher une ou plusieurs étiquettes à l'exercice. Vous pouvez également rajouter un énoncé, l'auteur et d'autres paramètres que nous n'allons pas détailler. Voici un exemple :
 
 \begin{figure}[!htb]
@@ -96,6 +178,9 @@ Si vous avez bien créé l'étiquette "Test" comme mentionné au début du tutor
 \newpage
 
 
+N'hésitez pas à entrer des différentes réponses afin de voir comment la plateforme réagit, essayez également le bouton "hint".
+
+\bigskip
 Vous avez peut être remarqué l'utilisation de formules spéciales pour l'écriture des différentes équations. Elles sont écrites en LaTeX, pour utiliser ce langage il est nécessaire d'utiliser des balises.
 \bigskip
 
@@ -133,7 +218,6 @@ Cette première partie concerne les exercices demandant une réponse sous la for
 
 Quand vous créez ce type d'exercice, il est nécessaire que le "Grading environment type" dans l'onglet "Environment" soit "Docker container", ne changez donc rien dans cet onglet.
 Lorsque vous créez un sous-problème, il doit être de type "code(une seule ligne)". Pour plus de facilité, nommez vos sous-problèmes "q1","q2"... Écrivez votre énoncé dans l'encadré correspondant. Il n'y a pas d'endroit où indiquer la réponse correcte et c'est tout à fait normal car nous allons l'inscrire dans un fichier.
-\bigskip
 
 Dans l'onglet "Fichier de l'exercice", créez un nouveau fichier que vous nommerez "run". 
 
@@ -142,13 +226,17 @@ Dans l'onglet "Fichier de l'exercice", créez un nouveau fichier que vous nommer
     \includegraphics[scale=0.5]{images/fichier.png}
 \end{figure}
 
-Pour éditer ce fichier, appuyez sur la case orange. \textbf{Copiez-collez ensuite le contenu du fichier "parsingDomain.py"} et modifiez-le en suivant les commentaires.
+Pour éditer ce fichier, appuyez sur la case orange. Ensuite, copiez-collez et modifiez en suivant les commentaires le contenu du fichier "exo\_parsingDomain.py" disponible en téléchargement via le lien ci-dessous :
+
+\bigskip
+\url{https://github.com/UCL-INGI/inginious-math/blob/master/exo_parsingDomain.py}
+\bigskip.
 
 Voici un exemple de question :
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[scale=0.65]{images/dom.png}
+    \includegraphics[scale=0.5]{images/dom.png}
 \end{figure}
 
 \newpage
@@ -159,14 +247,23 @@ Cette section concerne les exercices demandant une réponse sous la forme de coo
 
 Les paramètres à modifier par rapport à un exercice simple sont les mêmes qu'au point précédent. C'est à dire qu'il faut laisser le "Grading environment type" sur "Docker container" et créer un sous-problème de type "code(une seule ligne)". 
 
-La seule différence ce trouve dans l'onglet "Fichiers de l'exercice", où, après avoir créé un fichier nommé "run", \textbf{vous devez copier-coller le contenu du fichier "getCoordinates.py"} dans le fichier "run" et le modifier en fonction des commentaires.
+La seule différence ce trouve dans l'onglet "Fichiers de l'exercice", où, après avoir créé un fichier nommé "run", vous devez copier le contenu du fichier "getCoordinates.py" présent ci-dessous ou disponible via ce lien : 
+
+\bigskip
+\url{https://github.com/UCL-INGI/inginious-math/blob/master/getCoordinates.py}
+\bigskip
+
+Collez-le ensuite dans le fichier "run" et modifiez-le en fonction des commentaires.
+
+\lstinputlisting{codes/getCoordinates.py}
+
 \bigskip
 
 Voici un exemple d'exercice demandant des coordonnées de point :
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[scale=0.65]{images/coord.png}
+    \includegraphics[scale=0.6]{images/coord.png}
 \end{figure}
 
 \newpage
@@ -177,6 +274,12 @@ Dans cette dernière partie nous allons expliquer comment réaliser un exercice 
 
 Par défaut les entrées sont différentes et fixes pour chaque étudiant, si vous souhaitez qu'elles changent à chaque rafraichissement de la page de l'exercice, indiquez le nombre de paramètres aléatoires dans l'onglet "Paramètres de base" et cochez la case "Regénérer l'entrée aléatoire" juste en dessous.
 \bigskip
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.45]{images/Para_random.png}
+\end{figure}
+
 
 Concernant les paramètres, dans l'onglet "Environment", laissez le "Grading environment type" sur "Docker container" mais changez l'environnement de correction sur "math". 
 
@@ -191,7 +294,7 @@ Quand vous créez un sous-problème, sélectionnez le type "math". Dans l'énonc
 \bigskip
 Quand il y a un nombre qui doit être généré aléatoirement, écrivez : \textbf{<b><span id="ipr1"></span></b>} avec l'id du paramètre que nous allons définir plus loin. 
 
-Attention, les balises LaTeX ne fonctionne pas dans le bloc html.
+Attention, les balises LaTeX ne fonctionnent pas dans le bloc html.
 
 \bigskip
 
@@ -257,7 +360,16 @@ Voici un exemple d'énoncé comprenant 3 entrées aléatoires :
     \includegraphics[scale=0.6]{images/random.png}
 \end{figure}
 
-Après avoir réalisé l'énoncé, ne rajoutez pas d'"Expected answer" et allez directement dans l'onglet "Fichiers de l'exercice" pour créer un fichier nommé "run". \textbf{Copiez-collez ensuite le contenu du fichier "random.py"} et modifiez votre fichier en suivant les commentaires.
+Après avoir réalisé l'énoncé, ne rajoutez pas d'"Expected answer" et allez directement dans l'onglet "Fichiers de l'exercice" pour créer un fichier nommé "run". Copiez-collez ensuite le contenu du fichier "random.py" et modifiez votre fichier en suivant les commentaires. Le fichier est disponible via ce lien : 
+
+\bigskip
+\url{https://github.com/UCL-INGI/inginious-math/blob/master/random.py}
+\bigskip
+
+Et ci-dessous :
+
+\newpage
+\lstinputlisting{codes/random.py}
 
 \section{Fonctionnalité supplémentaire}
 
@@ -305,7 +417,7 @@ Vous pouvez modifier et ajouter des éléments à cet exemple pour qu'il corresp
     \item Mettre "axis" à la valeur "false" pour faire disparaitre les axes du graphe.
     \item Remplacer "Math.cos(x)" par la fonction qui doit apparaitre sur le graphe. Exemple : 3*x**2 pour $\mathbf{3x^2}$
     \item Ajouter des lignes "b.create...." pour rajouter des fonctions sur le même graphe.
-    \item Si plusieurs graphes dans une même question, il faut que l'id soit différent pour chaque graphe (en rouge dans l'exemple)
+    \item Si plusieurs graphes dans une même question, il faut que l'id soit différent pour chaque graphe (en rouge dans l'exemple). L'id sert à différencier les graphes entre-eux.
 \end{itemize}
 \bigskip
 
